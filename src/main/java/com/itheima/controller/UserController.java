@@ -25,7 +25,6 @@ public class UserController {
     }
 
     @DeleteMapping
-    @Cacheable(value="userCache",key="#id")
     public void deleteById(Long id){
         userMapper.deleteById(id);
     }
@@ -36,6 +35,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Cacheable(value="userCache",key="#id")
     public User getById(Long id){
         User user = userMapper.getById(id);
         return user;
