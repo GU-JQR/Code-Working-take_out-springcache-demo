@@ -32,6 +32,7 @@ public class UserController {
     }
 
 	@DeleteMapping("/delAll")
+    @CacheEvict(value="userCache",allEntries = true)
     public void deleteAll(){
         userMapper.deleteAll();
     }
