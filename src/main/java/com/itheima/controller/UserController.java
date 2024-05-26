@@ -4,6 +4,8 @@ import com.itheima.entity.User;
 import com.itheima.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +17,7 @@ public class UserController {
     private UserMapper userMapper;
 
     @PostMapping
+    @CachePut(value="userCache",key = "#user.id")//key的生成：userCache::1
     public User save(@RequestBody User user){
         userMapper.insert(user);
         return user;
