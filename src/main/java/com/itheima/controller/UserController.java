@@ -5,6 +5,7 @@ import com.itheima.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @DeleteMapping
+    @Cacheable(value="userCache",key="#id")
     public void deleteById(Long id){
         userMapper.deleteById(id);
     }
